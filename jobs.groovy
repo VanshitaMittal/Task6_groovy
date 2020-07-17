@@ -1,4 +1,4 @@
-job("j1_groovy"){
+job("kube1_groovy"){
   description("kubernetes job1")
   scm{
     github('VanshitaMittal/Task6','master')
@@ -16,7 +16,7 @@ job("j1_groovy"){
 }
 
 
-job("j2_groovy"){
+job("kube2_groovy"){
   steps{
     shell('''
 	if sudo ls /task6/jenkins | grep php
@@ -38,15 +38,15 @@ job("j2_groovy"){
 	''')
   }
   triggers {
-        upstream('j1_groovy', 'SUCCESS')
+        upstream('kube1_groovy', 'SUCCESS')
   }
 }
 
-job("j3_groovy")
+job("kube3_groovy")
 {
   steps{
     shell('''
-status=$(curl -o /dev/null -s -w "%{http_code}" http://192.168.99.101:30002)
+status=$(curl -o /dev/null -s -w "%{http_code}" http://192.168.99.104:30002)
 if [[ $status == 200 ]]
 then
     echo "Running"
@@ -58,7 +58,7 @@ fi
   }
   
   triggers {
-        upstream('j2_groovy', 'SUCCESS')
+        upstream('kube2_groovy', 'SUCCESS')
   }
   
   publishers {
