@@ -1,4 +1,3 @@
-  
 job("j1_groovy"){
   description("kubernetes job1")
   scm{
