@@ -7,7 +7,7 @@ job("kube1_groovy"){
     shell('sudo cp -vrf * /task6/jenkins')
   }
   triggers {
-        		upstream('TheSeedJobTask6', 'SUCCESS')
+        		upstream('SeedJob', 'SUCCESS')
     			}
 	triggers{
     gitHubPushTrigger()
